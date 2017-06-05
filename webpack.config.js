@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpritePlugin = require('svg-sprite-loader/plugin');
 const autoprefixer = require('autoprefixer');
+const S3Plugin = require('webpack-s3-plugin')
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
@@ -15,7 +16,7 @@ const buildPath = path.join(__dirname, './build');
 const imgPath = path.join(__dirname, './source/assets/img');
 const iconPath = path.join(__dirname, './source/assets/icons');
 const sourcePath = path.join(__dirname, './source');
-
+const awsPath = path.join(__dirname, './.aws.json');
 
 // Common plugins
 const plugins = [
@@ -31,7 +32,9 @@ const plugins = [
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(nodeEnv),
+      // AWS: JSON.parse(awsInfo)
     },
+
   }),
   new webpack.NamedModulesPlugin(),
   new HtmlWebpackPlugin({
@@ -52,6 +55,18 @@ const plugins = [
       context: sourcePath,
     },
   }),
+  // new S3Plugin({
+  //   // Only upload css and js
+  //   include: /.*\.(css|js)/,
+  //   // s3Options are required
+  //   s3Options: {
+  //     accessKeyId: process.env.AWS.ACCESS_KEY_ID,
+  //     secretAccessKey: process.env.AWS.SECRET_ACCESS_KEY,
+  //   },
+  //   s3UploadOptions: {
+  //     Bucket: process.env.AWS.BUCKET_NAME
+  //   }
+  // }),
 ];
 
 // Common rules
