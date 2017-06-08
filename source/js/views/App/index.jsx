@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import TopMenu from './TopMenu';
-import SideMenu from './SideMenu'
+import TopMenu from '../../components/TopMenu';
+import SideMenu from '../../components/SideMenu';
 
-import "./_index.scss"
+import './_App.scss';
 
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object,
   }
-
 
   render() {
     const { children } = this.props;

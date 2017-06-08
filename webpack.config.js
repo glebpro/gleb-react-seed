@@ -1,12 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const SpritePlugin = require('svg-sprite-loader/plugin');
 const autoprefixer = require('autoprefixer');
-const S3Plugin = require('webpack-s3-plugin')
+// const S3Plugin = require('webpack-s3-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
@@ -16,11 +14,10 @@ const buildPath = path.join(__dirname, './build');
 const imgPath = path.join(__dirname, './source/assets/img');
 const iconPath = path.join(__dirname, './source/assets/icons');
 const sourcePath = path.join(__dirname, './source');
-const awsPath = path.join(__dirname, './.aws.json');
+// const awsPath = path.join(__dirname, './.aws.json');
 
 // Common plugins
 const plugins = [
-  new SpritePlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     filename: 'vendor-[hash].js',
@@ -135,8 +132,7 @@ if (isProduction) {
 } else {
   // Development plugins
   plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new DashboardPlugin()
+    new webpack.HotModuleReplacementPlugin()
   );
 
   // Development rules

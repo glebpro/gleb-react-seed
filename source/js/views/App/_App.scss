@@ -86,12 +86,7 @@ hr {
   }
 }
 
-.MenuBreak{
-  display: block;
-  @include sm{
-    display: block !important;
-  };
-}
+
 .Page {
   order: 2;
   margin: 0;

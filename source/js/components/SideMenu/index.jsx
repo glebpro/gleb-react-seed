@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { IndexLink, Link } from 'react-router';
+import { IndexLink } from 'react-router';
 import { routeCodes } from '../../routes';
 
-import logo from "../../../assets/img/logo.jpg"
+import logo from '../../../assets/img/logo.jpg';
 
-import "./_SideMenu.scss"
+import './_SideMenu.scss';
 
 export default class SideMenu extends Component {
 

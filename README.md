@@ -19,12 +19,6 @@ $ npm start
 Visit `http://localhost:3000/` from your browser of choice.
 Server is visible from the local network as well.
 
-### Running it with [webpack dashboard](https://github.com/FormidableLabs/webpack-dashboard)
-
-```
-$ npm run dev
-```
-
 ## Build (production)
 
 Build will be placed in the `build` folder.

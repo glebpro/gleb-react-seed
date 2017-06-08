@@ -4,16 +4,39 @@
   "private": true,
   "license": "MIT",
   "main": "index.js",
+  "engines" : { "node" : ">=7.8.0" },
+  "description": "Starter boilerplate for React and Redux, using Webpack 2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/glebpro/gleb-react-seed.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "webpack2",
+    "boilerplate"
+  ],
+  "author": "Gleb Promokhov",
   "scripts": {
+
     "test": "echo \"Error: no test specified\" && exit 1",
+
     "start": "webpack-dev-server",
+
     "dev": "webpack-dashboard -t 'gleb-react-seed' -- webpack-dev-server",
+
     "build": "rm -rf ./build && NODE_ENV=\"production\" webpack",
+
     "lint-break-on-errors": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
+
     "lint": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
+
     "preview": "rm -rf ./build && NODE_ENV=\"production\" webpack-dashboard -t 'Preview Mode - gleb-react-seed' -- webpack-dev-server",
+
     "hook-add": "prepush install",
+
     "hook-remove": "prepush remove"
+
   },
   "devDependencies": {
     "autoprefixer": "^6.5.3",
@@ -42,13 +65,11 @@
     "postcss-loader": "^1.1.1",
     "prepush": "^3.1.11",
     "redux-logger": "^2.7.4",
+    "regenerator-runtime": "^0.10.5",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.0",
-    "svgo": "^0.7.2",
-    "svgo-loader": "^1.2.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
-    "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.2.1"
   },
   "dependencies": {
@@ -63,21 +84,8 @@
     "react-router": "^3.0.0",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1",
-    "svg-sprite-loader": "^3.0.5",
     "webpack-s3-plugin": "^1.0.0-rc.0"
   },
-  "description": "Starter boilerplate for React and Redux, using Webpack 2",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Stanko/react-redux-webpack2-boilerplate.git"
-  },
-  "keywords": [
-    "react",
-    "redux",
-    "webpack2",
-    "boilerplate"
-  ],
-  "author": "Gleb Promokhov",
   "prepush": [
     "npm run lint-break-on-errors --silent"
   ]
