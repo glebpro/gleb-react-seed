@@ -37,6 +37,9 @@ Hot reload will not work, so you need to refresh the page manually after changin
 npm run preview
 ```
 
+## Icons
+Use [realfavicongenerator](http://realfavicongenerator.net/)
+
 ## Linting
 
 For linting I'm using [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb),
@@ -44,6 +47,14 @@ but some options are overridden to my personal preferences.
 
 ```
 $ npm run lint
+```
+
+## Deploy
+
+Run a build a deploy it to s3 bucket, create a `.aws.json` from `aws-example.json`
+
+```
+gulp deploy
 ```
 
 ## Git hooks
