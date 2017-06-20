@@ -41,8 +41,8 @@
     margin: 0 3rem 0 0;
     line-height: 3rem;
   }
-}
 
-.TopMenu-link--active {
-  color: $black;
+  &--active{
+    color: $black;
+  }
 }

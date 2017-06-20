@@ -1,30 +1,85 @@
 import React, { Component } from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { CSSTransitionGroup } from 'react-transition-group'
 
-import App from 'views/App';
 import Home from 'views/Home';
 import About from 'views/About';
 import NotFound from 'views/NotFound';
 
 const publicPath = '/';
 
-export const routeCodes = {
-  HOME: publicPath,
-  ABOUT: `${ publicPath }about`,
-};
+export const routeCodes : Routes = [
+  {
+      title: "Home",
+      path: `${ publicPath }home`,
+      exact: true,
+      component: Home
+  },
+  {
+      title: "About",
+      path: `${ publicPath }about`,
+      component: About
+  },
+];
 
-export default class Routes extends Component {
+export class Routes extends Component {
+
   render() {
-    return (
-      <Router history={ browserHistory }>
-        <Route path={ publicPath } component={ App }>
-          <IndexRoute component={ Home } />
-          <Route path={ routeCodes.HOME } component={ Home } />
-          <Route path={ routeCodes.ABOUT } component={ About } />
 
-          <Route path='*' component={ NotFound } />
-        </Route>
-      </Router>
+    function buildRoutes() {
+      const routes = [];
+
+      // set routes
+      routeCodes.map((route, i) => (
+        routes.push(<Route path={ route.path } component={ route.component } key={ i } />)
+      ));
+
+      // 404 page
+      routes.push(<Route component={ NotFound } key={ routes.length+1 }/>)
+
+      return routes;
+    }
+
+    return (
+
+      <Route render={({ location }) => (
+        <CSSTransitionGroup
+          transitionName="fade"
+          transitionEnterTimeout={350}
+          transitionLeaveTimeout={500}
+        >
+          <Switch key={location.pathname} location={location}>
+            { buildRoutes() }
+          </Switch>
+        </CSSTransitionGroup>
+      )}
+      />
+
     );
   }
 }
+
+
+// <CSSTransitionGroup
+//   transitionName="fade"
+//   transitionEnterTimeout={300}
+//   transitionLeaveTimeout={300}
+// >
+// <div key="transition-group-content" >
+//   <Switch>
+//         { buildRoutes()}
+//     </Switch>
+//   </div>
+// </CSSTransitionGroup>
+//
+// <CSSTransitionGroup
+//   transitionName='fade'
+//   transitionEnterTimeout={500}
+//   transitionLeaveTimeout={500}
+// >
+//   <Switch key={location.pathname}>
+//     <Route path="/red" render={Red} />
+//     <Route path="/green" render={Green} />
+//     <Route path="/blue" render={Blue} />
+//   </Switch>
+// </CSSTransitionGroup>

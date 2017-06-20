@@ -1,0 +1,35 @@
+
+@import "../scss/toolkit";
+
+.App{
+  font-size: 1.8rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  @include md {
+    padding: 3rem;
+    flex-flow: row;
+  }
+
+  @include md {
+    padding: 4rem;
+    flex-flow: row;
+  }
+}
+
+.Page {
+  order: 2;
+  margin: 0;
+  padding: 0;
+  max-width: 60rem;
+  display: inline-block;
+
+  @include md{
+    padding: 0 3rem 0 3rem;
+  }
+}
+
+.View{
+  position: absolute;
+}

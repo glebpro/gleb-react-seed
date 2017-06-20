@@ -1,32 +1,38 @@
 import React, { Component } from 'react';
-import { IndexLink, Link } from 'react-router';
-import { routeCodes } from '../../routes';
+import { NavLink } from 'react-router-dom';
 
 import './_TopMenu.scss';
 
 export default class TopMenu extends Component {
 
-  render() {
-    function correctCase(route) {
-      return route[0].toUpperCase() + route.substr(1).toLowerCase();
-    }
+  constructor(props) {
+    super(props);
 
-    function buildRoutes() {
+    this.routeCodes = props.routeCodes;
+  }
+
+  render() {
+
+    function buildRoutes(routes) {
       const routeMenus = [];
-      Object.keys(routeCodes).forEach((route, i) => {
-        if (route === 'HOME') {
-          routeMenus.push(<IndexLink key={ i } activeClassName='TopMenu-link--active' className='TopMenu-link'to={ route }>{ correctCase(route) }</IndexLink>);
-        } else {
-          routeMenus.push(<Link key={ i } activeClassName='TopMenu-link--active' className='TopMenu-link'to={ route }>{ correctCase(route) }</Link>);
-        }
-      });
+      routes.map((route, i) => (
+          routeMenus.push(
+            <NavLink
+              activeClassName='TopMenu-link--active'
+              className='TopMenu-link'
+              to={ route.path }
+              key={ i }>
+              { route.title}
+            </NavLink>
+          )
+      ));
       return routeMenus;
     }
 
     return (
       <div className='TopMenu'>
-        <div className='TopMenu-links'>
-          { buildRoutes() }
+        <div className='TopMenu'>
+          { buildRoutes(this.routeCodes) }
         </div>
       </div>
     );

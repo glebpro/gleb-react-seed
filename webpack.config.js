@@ -3,8 +3,8 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-// const S3Plugin = require('webpack-s3-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
@@ -12,9 +12,7 @@ const isProduction = nodeEnv === 'production';
 const jsSourcePath = path.join(__dirname, './source/js');
 const buildPath = path.join(__dirname, './build');
 const imgPath = path.join(__dirname, './source/assets/img');
-const iconPath = path.join(__dirname, './source/assets/icons');
 const sourcePath = path.join(__dirname, './source');
-// const awsPath = path.join(__dirname, './.aws.json');
 
 // Common plugins
 const plugins = [
@@ -29,7 +27,6 @@ const plugins = [
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(nodeEnv),
-      // AWS: JSON.parse(awsInfo)
     },
 
   }),
@@ -52,18 +49,6 @@ const plugins = [
       context: sourcePath,
     },
   }),
-  // new S3Plugin({
-  //   // Only upload css and js
-  //   include: /.*\.(css|js)/,
-  //   // s3Options are required
-  //   s3Options: {
-  //     accessKeyId: process.env.AWS.ACCESS_KEY_ID,
-  //     secretAccessKey: process.env.AWS.SECRET_ACCESS_KEY,
-  //   },
-  //   s3UploadOptions: {
-  //     Bucket: process.env.AWS.BUCKET_NAME
-  //   }
-  // }),
 ];
 
 // Common rules
@@ -74,20 +59,6 @@ const rules = [
     use: [
       'babel-loader',
     ],
-  },
-  {
-    test: /\.svg$/,
-    use: [
-      {
-        loader: 'svg-sprite-loader',
-        options: {
-          extract: true,
-          spriteFilename: 'icons-sprite.svg',
-        },
-      },
-      'svgo-loader',
-    ],
-    include: iconPath,
   },
   {
     test: /\.(png|gif|jpg|svg)$/,
@@ -116,7 +87,11 @@ if (isProduction) {
         comments: false,
       },
     }),
-    new ExtractTextPlugin('style-[hash].css')
+    new ExtractTextPlugin('style-[hash].css'),
+    new CopyWebpackPlugin([
+      { context: sourcePath, from: 'assets/favicons/**', to: '[name].[ext]' },
+      { context: sourcePath, from: 'manifest.json' },
+    ])
   );
 
   // Production rules
@@ -141,15 +116,10 @@ if (isProduction) {
       test: /\.scss$/,
       exclude: /node_modules/,
       use: [
-        'style-loader',
-        // Using source maps breaks urls in the CSS loader
-        // https://github.com/webpack/css-loader/issues/232
-        // This comment solves it, but breaks testing from a local network
-        // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998
-        // 'css-loader?sourceMap',
-        'css-loader',
-        'postcss-loader',
-        'sass-loader?sourceMap',
+        { loader: 'style-loader', options: { sourceMap: true } },
+        { loader: 'css-loader', options: { sourceMap: true } },
+        { loader: 'postcss-loader', options: { sourceMap: true } },
+        { loader: 'sass-loader', options: { sourceMap: true } }
       ],
     }
   );

@@ -2,8 +2,6 @@
 
 A react webapp seed in case I ever need one.
 
-Based off [Marvin Boilerplate](https://github.com/workco/marvin)
-
 ## Setup
 
 ```
@@ -40,15 +38,6 @@ npm run preview
 ## Icons
 Use [realfavicongenerator](http://realfavicongenerator.net/)
 
-## Linting
-
-For linting I'm using [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb),
-but some options are overridden to my personal preferences.
-
-```
-$ npm run lint
-```
-
 ## Deploy
 
 Run a build a deploy it to s3 bucket, create a `.aws.json` from `aws-example.json`
@@ -57,18 +46,4 @@ Run a build a deploy it to s3 bucket, create a `.aws.json` from `aws-example.jso
 gulp deploy
 ```
 
-## Git hooks
-
-Linting pre-push hook is not enabled by default.
-It will prevent the push if lint task fails,
-but you need to add it manually by running:
-
-```
-npm run hook-add
-```
-
-To remove it, run this task:
-
-```
-npm run hook-remove
-```
+Based off [Marvin Boilerplate](https://github.com/workco/marvin)
