@@ -1,31 +1,47 @@
 # gleb-react-seed
 
 A react webapp seed in case I ever need one.
+Includes React static frontend and node/express backend server if needed.
 
 ## Setup
 
 ```
+$ git clone this that/
 $ npm install
 ```
 
-## Running in dev mode
+## Run frontend
 
 ```
-$ npm start
+$ npm run front
 ```
 
-Visit `http://localhost:3000/` from your browser of choice.
+Visit `http://localhost:3000/`
 Server is visible from the local network as well.
+
+## Run backend
+```
+$ npm run back
+```
+
+Visit `http://localhost:3001/`
+
+## Run both
+
+```
+$ npm run both
+```
 
 ## Build (production)
 
 Build will be placed in the `build` folder.
+### TODO: this will only build frontend
 
 ```
 $ npm run build
 ```
 
-## Running in preview production mode
+## Running frontend in preview production mode
 
 This command will start webpack dev server, but with `NODE_ENV` set to `production`.
 Everything will be minified and served.

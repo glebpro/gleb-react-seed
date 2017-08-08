@@ -9,10 +9,10 @@ const autoprefixer = require('autoprefixer');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
 
-const jsSourcePath = path.join(__dirname, './source/js');
+const jsSourcePath = path.join(__dirname, './frontend/js');
 const buildPath = path.join(__dirname, './build');
-const imgPath = path.join(__dirname, './source/assets/img');
-const sourcePath = path.join(__dirname, './source');
+const imgPath = path.join(__dirname, './frontend/assets/img');
+const sourcePath = path.join(__dirname, './frontend');
 
 // Common plugins
 const plugins = [
