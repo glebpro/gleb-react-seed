@@ -16,7 +16,7 @@ export default class Home extends Component {
   }
 
   componentWillUnmount() {
-    this.serverRequest.abort();
+    // this.serverRequest.abort();
   }
 
   render() {

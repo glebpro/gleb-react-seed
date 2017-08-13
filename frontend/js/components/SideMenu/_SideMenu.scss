@@ -39,8 +39,8 @@
 
 .SideMenu-logo{
   margin: 0 0 .5rem 0;
-  height: 100%;
-
+  height: $side-menu-collapsed-height;
+  
   @include md{
     height: initial;
   };
